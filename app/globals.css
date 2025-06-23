@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+.logo:hover {
+  background: linear-gradient(to top right, #2563eb, #9333ea);
+  -webkit-background-clip: text;
+  background-clip: text;
+  box-shadow: 0 1px 4px rgba(31, 41, 55, 0.08);
+  outline: none;
+}
+
+/* Global style for slider */
+.slider-gradient .MuiSlider-thumb {
+  background: linear-gradient(to top right, #3b82f6, #9333ea);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.slider-gradient .MuiSlider-track {
+  background: linear-gradient(to top right, #3b82f6, #9333ea);
+}
+
+.slider-gradient .MuiSlider-rail {
+  background-color: #e0e0e0;
+}
+
+.gradient-navbar {
+  font-weight: bold;
+  background: linear-gradient(to right, #3b82f6, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Global style for button */
+.btn-primary {
+  background: linear-gradient(to top right, #3b82f6, #9333ea);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease-in-out;
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(to top right, #2563eb, #9333ea);
+}
