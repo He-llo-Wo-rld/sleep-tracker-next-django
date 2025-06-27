@@ -9,32 +9,32 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mongodb"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id          String   @id @default(uuid()) // Первинний ключ
-  clerkUserId String   @unique
+  id          String   @id @default(uuid()) @map("_id")
   email       String   @unique
   name        String?
   imageUrl    String?
+  password    String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  records     Record[] // Зв'язок з моделлю Record
+  records     Record[]  @relation("UserRecords")
 }
 
 model Record {
-  id        String   @id @default(uuid())
+  id        String   @id @default(uuid()) @map("_id")
   text      String
   amount    Float
   date      DateTime @default(now())
-  userId    String   // Зовнішній ключ
-  user      User     @relation(fields: [userId], references: [clerkUserId], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], name: "UserRecords")
 
-  @@index([userId]) // Індекс для швидкого пошуку за userId
+  @@index([userId])
 }
 
 
