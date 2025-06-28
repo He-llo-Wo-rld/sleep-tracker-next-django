@@ -1,4 +1,3 @@
-// src/middleware.ts
 import { NextRequest, NextResponse } from "next/server";
 import { verifyJwtEdge } from "./lib/jwt";
 
@@ -11,7 +10,7 @@ export async function middleware(request: NextRequest) {
   if (token) {
     const payload = await verifyJwtEdge(token);
     console.log("middleware: payload from verifyJwtEdge:", payload);
-    userId = payload?.userId || null;
+    userId = typeof payload?.userId === "string" ? payload.userId : null;
   }
 
   if (!userId) {

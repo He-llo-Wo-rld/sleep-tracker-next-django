@@ -1,6 +1,6 @@
+import { Alert, Box, Paper, Typography } from "@mui/material";
 import getRecords from "app/api/records/getRecords";
 import { Record } from "types";
-import { Alert, Box, Paper, Typography } from "@mui/material";
 import RecordItem from "./RecordItem";
 
 const RecordHistory = async () => {

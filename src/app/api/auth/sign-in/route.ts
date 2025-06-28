@@ -5,10 +5,8 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   const { email, password } = await req.json();
-  const user = await db.user.findUnique({
-    where: { email },
-    select: { id: true, email: true, name: true, password: true }
-  });
+  const user = await db.user.findUnique({ where: { email } });
+  console.log("SIGNIN user:", user);
   if (!user || !user.password) {
     return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
   }
@@ -23,7 +21,13 @@ export async function POST(req: Request) {
 
   // Відповідь з Set-Cookie (HTTP-only, Secure)
   const response = NextResponse.json({
-    user: { id: user.id, email: user.email, name: user.name },
+    user: {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      createdAt: user.createdAt ? new Date(user.createdAt).toISOString() : null,
+      updatedAt: user.updatedAt ? new Date(user.updatedAt).toISOString() : null,
+    },
   });
   response.cookies.set("token", token, {
     httpOnly: true,

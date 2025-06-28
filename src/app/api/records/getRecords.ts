@@ -5,10 +5,11 @@ import { Record } from "@/types";
 import { cookies } from "next/headers";
 
 async function getUserIdFromCookies(): Promise<string | null> {
-  const token = cookies().get("token")?.value;
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
   if (!token) return null;
   const payload = verifyJwt(token);
-  return payload?.userId || null;
+  return typeof payload?.userId === "string" ? payload.userId : null;
 }
 
 async function getRecords(): Promise<{

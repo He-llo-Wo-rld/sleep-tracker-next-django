@@ -1,6 +1,6 @@
-import getRecords from "app/api/records/getRecords";
 import { Alert, Box, Paper, Typography } from "@mui/material";
-import BarChart from "./BarChart";
+import getRecords from "app/api/records/getRecords";
+import BarChart from "../../../../components/BarChart";
 
 const RecordChart = async () => {
   const { records, error } = await getRecords();

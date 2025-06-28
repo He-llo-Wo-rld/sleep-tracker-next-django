@@ -1,9 +1,9 @@
-import AuthorizedUser from "@/components/AuthorizedUser";
-import AddNewRecord from "@/components/AddNewRecord";
-import RecordChart from "@/components/RecordChart";
-import AverageSleep from "@/components/AverageSleep";
-import BestWorstSleep from "@/components/BestWorst";
-import RecordHistory from "@/components/RecordHistory";
+import AddNewRecord from "@/app/api/records/components/AddNewRecord";
+import AverageSleep from "@/app/api/records/components/AverageSleep";
+import BestWorstSleep from "@/app/api/records/components/BestWorst";
+import RecordChart from "@/app/api/records/components/RecordChart";
+import RecordHistory from "@/app/api/records/components/RecordHistory";
+import AuthorizedUser from "@/app/api/users/components/AuthorizedUser";
 
 export default function Dashboard() {
   return (

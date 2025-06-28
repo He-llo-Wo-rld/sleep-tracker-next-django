@@ -1,10 +1,14 @@
 "use client";
 import { useCurrentUser } from "@/hooks/useCurrentUser";
+import { useAuthStore } from "@/store/authStore";
 import { AppBar, Box, Button, Toolbar } from "@mui/material";
 import Link from "next/link";
 
 export default function Navbar() {
-  const { user, loading } = useCurrentUser();
+  const user = useAuthStore((state) => state.user);
+  const { loading } = useCurrentUser();
+  
+  if (loading) return null;
 
   return (
     <AppBar position="static" sx={{ bgcolor: "grey.800" }}>
@@ -21,14 +25,25 @@ export default function Navbar() {
 
         {/* Navigation Links */}
         <Box sx={{ display: "flex", gap: 2 }}>
-           {loading ? null : user ? (
+          {user ? (
             <>
               <Link href="/" className="gradient-navbar">
                 Dashboard
               </Link>
-              <Link href="/logout" className="gradient-navbar">
+              <Button
+                color="inherit"
+                className="gradient-navbar"
+                onClick={async () => {
+                  await fetch("/api/auth/logout", {
+                    method: "POST",
+                    credentials: "include",
+                  });
+                  useAuthStore.getState().setUser(null);
+                  window.location.href = "/";
+                }}
+              >
                 Logout
-              </Link>
+              </Button>
             </>
           ) : (
             <>

@@ -5,8 +5,7 @@ import { Box, Container, IconButton, Typography } from "@mui/material";
 import Link from "next/link";
 
 export default function Footer() {
-  // Заглушка: замініть на вашу реальну перевірку сесії
-  const userId = null; // TODO: Реалізуйте отримання userId з cookie/session
+  const userId = null; 
   return (
     <Box
       component="footer"

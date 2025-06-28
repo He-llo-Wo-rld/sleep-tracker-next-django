@@ -1,7 +1,5 @@
 "use client";
 
-import deleteRecord from "app/api/records/deleteRecord";
-import { Record } from "types";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {
   Box,
@@ -10,7 +8,9 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
+import deleteRecord from "app/api/records/deleteRecord";
 import { useState } from "react";
+import { Record } from "types";
 
 const RecordItem = ({ record }: { record: Record }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -36,7 +36,7 @@ const RecordItem = ({ record }: { record: Record }) => {
     >
       <Box>
         <Typography variant="body2" color="text.secondary">
-          {new Date(record?.date).toLocaleDateString()}
+          {record?.date ? new Date(record.date).toISOString().slice(0, 10) : ""}
         </Typography>
         <Typography
           variant="h6"

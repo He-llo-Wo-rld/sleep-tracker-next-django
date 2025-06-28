@@ -19,10 +19,8 @@ export function verifyJwt<T = Record<string, unknown>>(
 ): T | null {
   try {
     const decoded = jwt.verify(token, JWT_SECRET) as T;
-    console.log("verifyJwt: decoded:", decoded);
     return decoded;
-  } catch (error) {
-    console.error("verifyJwt error:", error);
+  } catch {
     return null;
   }
 }
@@ -36,10 +34,9 @@ export async function verifyJwtEdge<T = Record<string, unknown>>(
       token,
       new TextEncoder().encode(JWT_SECRET)
     );
-    console.log("verifyJwtEdge: payload:", payload);
+
     return payload as T;
-  } catch (error) {
-    console.error("verifyJwtEdge error:", error);
+  } catch {
     return null;
   }
 }

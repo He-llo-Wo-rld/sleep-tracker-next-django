@@ -1,13 +1,20 @@
 "use client";
+import { useAuthStore } from "@/store/authStore";
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const router = useRouter();
+
+  const user = useAuthStore((state) => state.user);
+
+  useEffect(() => {
+    if (user) {
+      window.location.href = "/";
+    }
+  }, [user]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -16,9 +23,14 @@ export default function SignIn() {
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: { "Content-Type": "application/json" },
+      credentials: "include",
     });
     if (res.ok) {
-      router.refresh();
+      const data = await res.json();
+      console.log("API user", data.user);
+      // Оновлюємо Zustand user
+      const { useAuthStore } = await import("@/store/authStore");
+      useAuthStore.getState().setUser(data.user);
       window.location.href = "/";
     } else {
       const data = await res.json();

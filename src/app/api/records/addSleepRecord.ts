@@ -16,7 +16,7 @@ interface RecordResult {
 }
 
 async function getUserIdFromCookies(): Promise<string | null> {
-  const token = cookies().get("token")?.value;
+  const token = (await cookies()).get("token")?.value;
   if (!token) return null;
   const payload = verifyJwt(token);
   return payload?.userId || null;

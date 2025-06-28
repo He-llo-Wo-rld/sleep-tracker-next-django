@@ -30,7 +30,6 @@ export default function AuthorizedUser() {
       }}
     >
       <Avatar
-        src={user.imageUrl}
         alt={`${firstName}'s avatar`}
         sx={{
           width: 96,
